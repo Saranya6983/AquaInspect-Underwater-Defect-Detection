@@ -1,0 +1,6 @@
+{
+  "color": "white_patch",
+  "dehaze": "dcp",
+  "denoise": "gaussian",
+  "contrast": "he"
+}

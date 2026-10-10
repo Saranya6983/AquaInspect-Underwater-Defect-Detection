@@ -1,0 +1,58 @@
+benchmark: 24 synthetic images
+       Stage       Method  PSNR_vs_clean  SSIM_vs_clean    UIQM   UCIQE
+0      color         none        11.2810         0.3941  2.7413  0.3102
+1      color   gray_world        11.9918         0.3893  2.7884  0.2386
+2      color  white_patch        11.7089         0.1857  2.9677  0.3907
+3      color     red_comp        12.2064         0.4055  3.0441  0.2283
+4     dehaze         none        11.2810         0.3941  2.7413  0.3102
+5     dehaze          dcp        11.0400         0.3762  2.7215  0.3154
+6     dehaze         udcp         9.8350         0.2696  2.5259  0.3538
+7    denoise         none        11.2810         0.3941  2.7413  0.3102
+8    denoise     gaussian        11.3119         0.5644  1.7684  0.2943
+9    denoise       median        11.3018         0.5607  1.2194  0.2938
+10   denoise    bilateral        11.3046         0.5626  0.9359  0.2919
+11   denoise          nlm        11.2393         0.5411  0.5707  0.2912
+12  contrast         none        11.2810         0.3941  2.7413  0.3102
+13  contrast           he        10.8970         0.1695  2.7159  0.4150
+14  contrast        clahe        13.9888         0.3092  3.1042  0.3304
+raw objective 0.275
+color none 0.275
+color gray_world 0.298
+color white_patch 0.247
+color red_comp 0.33
+-> color = red_comp
+dehaze none 0.33
+dehaze dcp 0.325
+dehaze udcp 0.318
+-> dehaze = none
+denoise none 0.33
+denoise gaussian 0.414
+denoise median 0.383
+denoise bilateral 0.376
+denoise nlm 0.383
+-> denoise = gaussian
+contrast none 0.414
+contrast he 0.398
+contrast clahe 0.646
+-> contrast = clahe
+                             Config  crack_F1  corr_F1  objective     PSNR    SSIM  level_ok
+0      A0  raw input, no refinement    0.4414   0.1250     0.2832  11.2810  0.3941    0.1250
+1        A1  raw + crack refinement    0.4250   0.1250     0.2750  11.2810  0.3941    0.1250
+2            A2  + color (red_comp)    0.5078   0.1526     0.3302  12.2064  0.4055    0.1250
+3               A3  + dehaze (none)    0.5078   0.1526     0.3302  12.2064  0.4055    0.1250
+4          A4  + denoise (gaussian)    0.4215   0.4073     0.4144  12.2986  0.6082    0.1667
+5            A5  + contrast (clahe)    0.7759   0.5158     0.6459  14.9287  0.6656    0.4167
+6   Full chain, NO crack refinement    0.7119   0.5158     0.6139  14.9287  0.6656    0.5833
+7                  Full minus color    0.7714   0.1250     0.4482  13.5285  0.6539    0.1667
+8                 Full minus dehaze    0.7759   0.5158     0.6459  14.9287  0.6656    0.4167
+9                Full minus denoise    0.4688   0.1434     0.3061  15.3582  0.2735    0.1250
+10              Full minus contrast    0.4215   0.4073     0.4144  12.2986  0.6082    0.1667
+11                 FULL AquaInspect    0.7759   0.5158     0.6459  14.9287  0.6656    0.4167
+     Method Refinement     IoU  Precision  Recall      F1  Latency_ms
+0     canny         no  0.0021     0.1778  0.1297  0.1392     17.9589
+1     canny        yes  0.0021     0.1778  0.1297  0.1392     20.2815
+2  blackhat         no  0.1807     0.3445  0.9329  0.4435     18.8711
+3  blackhat        yes  0.2728     0.6356  0.5955  0.5863     33.3087
+4    hybrid         no  0.4231     0.7292  0.7719  0.7119     18.8341
+5    hybrid        yes  0.5095     0.9172  0.7129  0.7759     25.6359
+TOTAL 235 s  SELECTED {'color': 'red_comp', 'dehaze': 'none', 'denoise': 'gaussian', 'contrast': 'clahe'}
